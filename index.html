@@ -20,7 +20,7 @@
 
   /* ================= СИНЯЯ ШАПКА ================= */
   .hero {
-    background: #0067b8;   /* фирменный синий Microsoft */
+    background: #0067b8;
     color: #ffffff;
     padding: 32px 0 40px;
   }
@@ -77,6 +77,12 @@
     max-width: 700px;
   }
 
+  .section h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 24px 0 12px;
+  }
+
   .section p {
     font-size: 14px;
     margin-bottom: 10px;
@@ -84,7 +90,7 @@
     color: #171717;
   }
 
-  /* Раскрывающийся блок "Прежде чем использовать..." */
+  /* Раскрывающийся блок */
   .details {
     margin: 16px 0;
     max-width: 900px;
@@ -179,11 +185,83 @@
     50%      { opacity: 0.4; }
   }
 
+  /* ================= КОД / КОМАНДА ================= */
+  .code-block {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 12px 16px;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 13px;
+    margin: 12px 0;
+    max-width: 900px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .code-block code {
+    color: #171717;
+  }
+
+  /* ================= ТАБЛИЦА ХЭШЕЙ ================= */
+  .hash-table-wrap {
+    margin: 20px 0;
+    max-width: 900px;
+    overflow-x: auto;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+  }
+
+  .hash-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .hash-table th {
+    background: #f4f4f4;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 2px solid #e6e6e6;
+    white-space: nowrap;
+  }
+
+  .hash-table td {
+    padding: 8px 14px;
+    border-bottom: 1px solid #f0f0f0;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 12px;
+    word-break: break-all;
+  }
+
+  .hash-table tr:hover td {
+    background: #fafafa;
+  }
+
+  .hash-table .lang {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* Выделение русского языка */
+  .hash-table tr.highlight td {
+    background: #e8f0fe;
+  }
+  .hash-table tr.highlight:hover td {
+    background: #dce8fc;
+  }
+
   /* ================= АДАПТИВ ================= */
   @media (max-width: 640px) {
     .hero { padding: 24px 0 28px; }
     .hero h1 { font-size: 26px; }
     .section h2 { font-size: 20px; }
+    .section h3 { font-size: 17px; }
+    .hash-table td, .hash-table th { padding: 6px 8px; font-size: 11px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -312,6 +390,95 @@
         </a>
       </section>
 
+      <!-- ================= РАЗДЕЛ ПРОВЕРКИ (КАК НА MICROSOFT) ================= -->
+      <section class="section" id="verify-section">
+        <h2>Проверка скачанного файла</h2>
+
+        <p>
+          Чтобы проверить целостность и подлинность скачиваемых данных, выполните следующие действия:
+        </p>
+
+        <ol style="max-width: 900px; padding-left: 24px; font-size: 14px; line-height: 1.7;">
+          <li>Скачайте ISO-файл выбранного продукта и следуйте инструкции по установке.</li>
+          <li>
+            Запустите Windows PowerShell.
+            Если вам нужна помощь в поиске расположения PowerShell для своей операционной системы,
+            перейдите
+            <a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-windows-powershell?view=powershell-7" target="_blank" rel="noopener">сюда</a>.
+          </li>
+          <li>
+            В PowerShell вычислите хэш-значение для скачиваемого ISO-файла с помощью командлета
+            <b>Get-FileHash</b>. Например:
+            <div class="code-block"><code>Get-FileHash C:\Users\user1\Downloads\Win11_25H2_Russian_x64_v2.iso</code></div>
+          </li>
+          <li>
+            Если выходные данные SHA256 совпадают со значением (см. таблицу ниже) для продукта,
+            который вы скачали, это подтверждает, что файл не был поврежден, подделан или
+            изменен по сравнению с оригиналом.
+          </li>
+        </ol>
+
+        <p style="margin-top: 12px; font-size: 13px;">
+          Узнайте больше о командлете
+          <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-filehash?view=powershell-7" target="_blank" rel="noopener">Get-FileHash</a>.
+        </p>
+
+        <h3>Хэш-значения ISO-файлов для каждого языка</h3>
+
+        <div class="hash-table-wrap">
+          <table class="hash-table">
+            <thead>
+              <tr>
+                <th>Язык</th>
+                <th>Хеш-код (SHA256)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="lang">Арабский 64-bit</td><td>10BF2F86F148D6CF06BDFFE3010C413187C72516A49EB61B3643977EFFC52D14</td></tr>
+              <tr><td class="lang">Болгарский 64-bit</td><td>0C2059A4F848929ED29DB0CEDE0D3A24773FE25190758596DB5F34034D5A747B</td></tr>
+              <tr><td class="lang">Чешский 64-bit</td><td>BC5C5379F076A0CDEE08ADEDE96361E72CB91F2FFE240A49188852C9D47FE84D</td></tr>
+              <tr><td class="lang">Датский 64-bit</td><td>11AE2C8BE4C5D90AAFB789CFD71759D34D762C1094DC3536738426C70594DFB2</td></tr>
+              <tr><td class="lang">Немецкий 64-bit</td><td>4FA6FE9500CE7166B22F8AA1705DF89F7E69AA9065BDA6535EEFE711EED718D1</td></tr>
+              <tr><td class="lang">Греческий 64-bit</td><td>EE8AD312C152C69E79576D2104396D08CFD441DE6456598B76F88FF47D6F6E39</td></tr>
+              <tr><td class="lang">Английский (международный) 64-bit</td><td>66B7B4B71763ED6F9B2CE29326ED9284544DA6F5283D00329921540C01AAAEEA</td></tr>
+              <tr><td class="lang">Английский 64-bit</td><td>768984706B909479417B2368438909440F2967FF05C6A9195ED2667254E465E3</td></tr>
+              <tr><td class="lang">Испанский 64-bit</td><td>F5495DFCEA4294C7924420AD860F409623575436F85A8D0A66A6BD9A1C3433D6</td></tr>
+              <tr><td class="lang">Испанский (Мексика) 64-bit</td><td>40DEAA9575396C64794B6A9B470F96AD68BB9FD5AAC4298A3DE7A665BA0B1AE7</td></tr>
+              <tr><td class="lang">Эстонский 64-bit</td><td>B5BFD0CC7BDA9156CB0F700AE4FA064AF838446B2476152B6A63E68A0570D411</td></tr>
+              <tr><td class="lang">Финский 64-bit</td><td>E41933B5137C016260E1B16B508EB786D9271BD4C6EABA566045490B7A8FCE7E</td></tr>
+              <tr><td class="lang">Французский (Канада) 64-bit</td><td>EC1089A9D710E0F1C69CD1490B577BC27B41DA16C7AF2EEF79DE6EC519C95FEA</td></tr>
+              <tr><td class="lang">Французский 64-bit</td><td>A02693BEB8EB166AFDFDB7DB49176A2B547F81E61030A695FE172277DB6A1977</td></tr>
+              <tr><td class="lang">Иврит 64-bit</td><td>DB303313555E289C90DF5246A527153808E5ADE64D78A33727ED3FCB999DC1A1</td></tr>
+              <tr><td class="lang">Хорватский 64-bit</td><td>70D9B2678FD4CF23CA8CDA12CCE280B006DB82AE9BF2083F6C18E3EB84612E69</td></tr>
+              <tr><td class="lang">Венгерский 64-bit</td><td>8E625ED2EAFD531838A027D3FF3E298AA13A9AC70E0803774FE51A4EFCF85C88</td></tr>
+              <tr><td class="lang">Итальянский 64-bit</td><td>E72CBA0335C8E67AC523F3F997F6D38E441EB06414CE42FD38B08A639ABD0D87</td></tr>
+              <tr><td class="lang">Японский 64-bit</td><td>19D94439DCACB282D99CC7D3DEC5CA2943A6D1DFB1DF79610E5528696BCD3BAC</td></tr>
+              <tr><td class="lang">Корейский 64-bit</td><td>9F39A222AD4A96BD5BBB18AFE7B5EED583DD18622B225DBAB478C363C4019642</td></tr>
+              <tr><td class="lang">Литовский 64-bit</td><td>B8088A3739F8E688D04CC89B34E5145EBA6533347531BE8C866D8A6C48A5B385</td></tr>
+              <tr><td class="lang">Латышский 64-bit</td><td>9453D410298E50C36CE31153326857848256E0980FF8FDA501B4D3817540BEB9</td></tr>
+              <tr><td class="lang">Португальский (Бразилия) 64-bit</td><td>50FE4703CF0DF0072E093D1F5D58ED450E4C49D8CA960433BBE6278D5EF10107</td></tr>
+              <tr><td class="lang">Португальский 64-bit</td><td>C74C96AA06E2548F14C76B5FD6600514C0D4F6EB05A731E4272AB005E8F48CE3</td></tr>
+              <tr><td class="lang">Румынский 64-bit</td><td>87FCB81AB442F306AD2B208E13559C6BE62AB8E4E43DA58EECBA9E6CA99FB594</td></tr>
+              <tr class="highlight"><td class="lang"><b>Русский 64-bit</b></td><td><b>F809748051460F28C53360A6864FB4C8E5C4D2E11B1C5DA0C7702DD4080796D7</b></td></tr>
+              <tr><td class="lang">Словацкий 64-bit</td><td>98A85385474C5F37F210AABA9424F94E1C3AB5C78CF8E4D46CAB3120A309B31E</td></tr>
+              <tr><td class="lang">Словенский 64-bit</td><td>5F8522D6C0018D4A243DE1C8AD74A963F269500314A8093C3ED1D5A5F4307625</td></tr>
+              <tr><td class="lang">Сербский (латиница) 64-bit</td><td>136C2AF587FFF4EE2D088679BC682FEC35D240A68F7A1737949FD69BC979C000</td></tr>
+              <tr><td class="lang">Шведский 64-bit</td><td>F2271C3A7CF191061FA4A72D88319CB1B23EAE73D1041038BCD8D719422BC501</td></tr>
+              <tr><td class="lang">Тайский 64-bit</td><td>95FEA28F15FC7618BA0A9396BCF60412BB3A6C40D4C25D104B32E45559DEEBE2</td></tr>
+              <tr><td class="lang">Турецкий 64-bit</td><td>0E3C966C742D86A08AC3A96CC84928739A3EAC09556B60E71C9E6CA419928113</td></tr>
+              <tr><td class="lang">Украинский 64-bit</td><td>E7F23D476992C09B212A40DB0CAE43FF5006CE2632D3F12467DA603562C54732</td></tr>
+              <tr><td class="lang">Китайский (упрощенное письмо) 64-bit</td><td>7408581E67BC455EBAAFB9230E531ABF45B1C8864A22114A1B03893F897102E4</td></tr>
+              <tr><td class="lang">Китайский (традиционное письмо) 64-bit</td><td>649D95E77EF37E975BF9DEE98900282A93C0921748CC5D5AE00B09C29CB7D529</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="font-size: 13px; color: #666; margin-top: 12px;">
+          Хэш-значения актуальны для текущего выпуска (версия 25H2). При выходе новой версии
+          значения обновляются на официальном сайте Microsoft.
+        </p>
+      </section>
+
     </div>
   </main>
 
@@ -323,13 +490,11 @@
 
     const countEl = document.getElementById('count');
 
-    // загрузка текущего значения
     fetch(API + '/')
       .then(r => r.json())
       .then(d => { countEl.textContent = d.count ?? 0; })
       .catch(() => { countEl.textContent = '—'; });
 
-    // любая из трёх кнопок увеличивает счётчик
     ['downloadBtn1', 'downloadBtn2', 'downloadBtn3'].forEach(id => {
       document.getElementById(id).addEventListener('click', async () => {
         try {
